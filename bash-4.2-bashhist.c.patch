@@ -1,0 +1,17 @@
+--- bashhist.c.orig     2013-02-06 07:27:35.410780583 +1100
++++ bashhist.c  2013-02-06 07:36:50.453976262 +1100
+@@ -709,12 +709,12 @@
+   char trunc[SYSLOG_MAXLEN];
+
+   if (strlen(line) < SYSLOG_MAXLEN)
+-    syslog (SYSLOG_FACILITY|SYSLOG_LEVEL, "HISTORY: PID=%d UID=%d %s", getpid(), current_user.uid, line);
++    syslog (SYSLOG_FACILITY|SYSLOG_LEVEL, "HISTORY: [%s UID=%d] %s", current_user.user_name, current_user.uid, line);
+   else
+     {
+       strncpy (trunc, line, SYSLOG_MAXLEN);
+       trunc[SYSLOG_MAXLEN - 1] = '\0';
+-      syslog (SYSLOG_FACILITY|SYSLOG_LEVEL, "HISTORY (TRUNCATED): PID=%d UID=%d %s", getpid(), current_user.uid, trunc);
++      syslog (SYSLOG_FACILITY|SYSLOG_LEVEL, "HISTORY (TRUNCATED): [%s UID=%d] %s", current_user.user_name, current_user.uid, trunc);
+      }
+ }
+ #endif
